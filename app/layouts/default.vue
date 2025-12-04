@@ -7,7 +7,7 @@
           
           <div>
             <NuxtLink to="/" class="text-xl font-bold text-gray-800 dark:text-gray-100 no-underline">
-              NTPUSU 學生自治雲
+              NTPU 學生自治雲
             </NuxtLink>
           </div>
           
