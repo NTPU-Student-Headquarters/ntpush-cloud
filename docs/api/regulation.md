@@ -2,7 +2,7 @@
 
 ## regulation/list
 
-路徑： `https://ntpush-regulation.pages.dev/api/regulation/list` ，無請求參數
+路徑： `https://cloud.ntpusu.org/api/regulation/list` ，無請求參數
 
 回應格式：法規清單 array，各元素為一個 array 代表法規，第一個子元素是法規代碼（四碼正整數），第二個子元素是法規簡稱（含有非 ASCII 字元的字串），例如
 
@@ -19,7 +19,7 @@
 
 ## regulation/single/:id
 
-呼叫範例： `https://ntpush-regulation.pages.dev/api/regulation/single/6001`
+呼叫範例： `https://cloud.ntpusu.org/api/regulation/single/6001`
 
 回傳範例：
 
