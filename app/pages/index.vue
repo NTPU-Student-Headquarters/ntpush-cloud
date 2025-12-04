@@ -59,8 +59,8 @@ const systems = [
     title: '裁判書管理系統(製作中)',
     desc: '學生法院上傳裁判書使用。',
     icon: 'book',
-    color: 'text-purple-600 dark:text-purple-400',
-    bg: 'bg-purple-100 dark:bg-purple-900/20',
+    color: 'text-orange-600 dark:text-orange-400',
+    bg: 'bg-orange-100 dark:bg-orange-900/20',
     link: ''
   }
 ]
@@ -69,14 +69,23 @@ const systems = [
 <template>
   <div class="py-8 animate-fade-in"> <!-- v-if="user" -->
     
-    <!-- 歡迎區塊 -->
+    <!-- 歡迎區塊 
     <div class="mb-10">
       <h2 class="text-3xl font-bold text-slate-800 dark:text-slate-100 mb-2">
-        早安，綠頭鴨<!--{{ user.name }}-->
+        早安user.name 
       </h2>
       <p class="text-slate-500 dark:text-slate-400 flex items-center gap-2">
         <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
         系統運作正常 · 您的權限級別：<span class="font-mono bg-slate-200 dark:bg-slate-700 px-1.5 rounded text-xs text-slate-700 dark:text-slate-300">DUCK</span>
+      </p>
+    </div>-->
+    <div class="mb-10">
+      <h2 class="text-3xl font-bold text-slate-800 dark:text-slate-100 mb-2">
+        學生自治公開資訊維護系統 
+      </h2>
+      <p class="text-slate-500 dark:text-slate-400 flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+        僅供內部使用，會員請至<<NuxtLink to="https://ntpusu.org">會網</NuxtLink>瀏覽。
       </p>
     </div>
 
