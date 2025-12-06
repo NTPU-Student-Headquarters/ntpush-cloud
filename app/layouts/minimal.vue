@@ -1,3 +1,4 @@
+<!-- app/layouts/minimal.vue -->
 <template>
   <slot />
 </template>

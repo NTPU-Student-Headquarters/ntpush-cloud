@@ -1,3 +1,5 @@
+<!-- app/pages/regulation/index.vue -->
+
 <script setup lang="ts">
 // 設定使用 cloud 佈局
 definePageMeta({
