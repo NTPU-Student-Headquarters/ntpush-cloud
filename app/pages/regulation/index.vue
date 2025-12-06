@@ -1,7 +1,6 @@
 <!-- app/pages/regulation/index.vue -->
 
 <script setup lang="ts">
-// 設定使用 cloud 佈局
 definePageMeta({
   layout: 'cloud'
 })
@@ -19,12 +18,11 @@ const selectedFilters = ref(['common', 'sanxia', 'taipei'])
 const isModalOpen = ref(false)
 const currentLaw = ref<{ id: string, title: string } | null>(null)
 
-// -- 資料獲取與處理 --
+// -- 取得、處理資料 --
 
 const { data: lawListResponse } = await useFetch('/api/regulation/list')
 const lawList = computed(() => lawListResponse.value || [])
 
-// 定義六大區塊的標題與對應的篩選 Key
 const categories = [
   { prefix: '1', title: '三峽學生會', filterKey: 'sanxia' },
   { prefix: '2', title: '三峽議會', filterKey: 'sanxia' },
@@ -34,7 +32,7 @@ const categories = [
   { prefix: '6', title: '總會', filterKey: 'common' },
 ]
 
-// 核心邏輯：將法規分配到各個區塊
+// 將法規分配到各個區塊
 const categorizedLaws = computed(() => {
   const groups: Record<string, typeof lawList.value> = {
     '1': [], '2': [], '3': [], '4': [], '5': [], '6': []
@@ -77,7 +75,7 @@ const hasData = (prefix: string) => {
 </script>
 
 <template>
-  <div class="animate-fade-in pb-12">
+  <div class="animate-fade-in pb-12 w-full">
     
     <!-- Header Area -->
     <div class="mb-8">
@@ -95,7 +93,7 @@ const hasData = (prefix: string) => {
       </p>
     </div>
 
-    <!-- Filter Chips (M3 Style) -->
+    <!-- Filter Chips -->
     <div class="mb-8 p-1">
       <h3 class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-3 ml-1">顯示篩選</h3>
       <div class="flex flex-wrap gap-3">
@@ -118,36 +116,36 @@ const hasData = (prefix: string) => {
     </div>
 
     <!-- 6-Block Layout -->
-    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5 lg:gap-6 w-full">
       
       <template v-for="cat in categories" :key="cat.prefix">
         <!-- 僅當符合篩選條件時顯示區塊 -->
         <div 
           v-if="shouldShowCategory(cat.filterKey)" 
-          class="flex flex-col h-full bg-white dark:bg-slate-800 rounded-[24px] border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md"
+          class="flex flex-col h-full bg-white dark:bg-slate-800 rounded-[24px] border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md min-w-0"
         >
           <!-- Block Header -->
-          <div class="px-6 py-4 bg-slate-50 dark:bg-slate-700/30 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center">
-            <h2 class="font-bold text-slate-700 dark:text-slate-200 flex items-center gap-2">
-              <span class="w-6 h-6 rounded-full bg-slate-200 dark:bg-slate-600 text-slate-600 dark:text-slate-300 flex items-center justify-center text-xs font-mono font-bold">{{ cat.prefix }}</span>
-              {{ cat.title }}
+          <div class="px-4 sm:px-6 py-4 bg-slate-50 dark:bg-slate-700/30 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center">
+            <h2 class="font-bold text-slate-700 dark:text-slate-200 flex items-center gap-2 min-w-0">
+              <span class="w-6 h-6 rounded-full bg-slate-200 dark:bg-slate-600 text-slate-600 dark:text-slate-300 flex items-center justify-center text-xs font-mono font-bold flex-shrink-0">{{ cat.prefix }}</span>
+              <span class="truncate">{{ cat.title }}</span>
             </h2>
           </div>
 
           <!-- List Content -->
-          <div class="flex-grow">
+          <div class="flex-grow min-h-0">
             <ul v-if="hasData(cat.prefix)" class="divide-y divide-slate-100 dark:divide-slate-700/50">
               <li 
                 v-for="([id, title]) in categorizedLaws[cat.prefix]" 
                 :key="id"
-                class="flex items-start gap-4 px-6 py-4"
+                class="flex items-start gap-3 sm:gap-4 px-4 sm:px-6 py-4 min-w-0"
               >
-                <span class="font-mono text-slate-400 dark:text-slate-500 text-sm mt-0.5 select-none">
+                <span class="font-mono text-slate-400 dark:text-slate-500 text-sm mt-0.5 select-none flex-shrink-0">
                   {{ id.toString().padStart(4, '0') }}
                 </span>
                 <span 
                   @click="openModal(id.toString(), title)"
-                  class="text-slate-700 dark:text-slate-200 font-medium leading-snug cursor-pointer hover:text-blue-600 dark:hover:text-blue-400 hover:underline decoration-blue-500/30 underline-offset-4 transition-all"
+                  class="text-slate-700 dark:text-slate-200 font-medium leading-snug cursor-pointer hover:text-blue-600 dark:hover:text-blue-400 hover:underline decoration-blue-500/30 underline-offset-4 transition-all break-words min-w-0"
                 >
                   {{ title }}
                 </span>
@@ -179,18 +177,18 @@ const hasData = (prefix: string) => {
             <!-- Header -->
             <div class="p-6 pb-2">
               <div class="flex items-start justify-between gap-4">
-                <div>
+                <div class="min-w-0 flex-1">
                   <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs font-mono mb-3">
                     <span class="material-symbols-rounded text-sm">tag</span>
                     {{ currentLaw?.id.toString().padStart(4, '0') }}
                   </div>
-                  <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100 leading-tight">
+                  <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100 leading-tight break-words">
                     {{ currentLaw?.title }}
                   </h3>
                 </div>
                 <button 
                   @click="closeModal"
-                  class="p-2 -mr-2 -mt-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-500 transition-colors"
+                  class="p-2 -mr-2 -mt-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-500 transition-colors flex-shrink-0"
                 >
                   <span class="material-symbols-rounded">close</span>
                 </button>
@@ -202,7 +200,7 @@ const hasData = (prefix: string) => {
               <p class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-3">操作選項</p>
               
               <div class="grid grid-cols-2 gap-4">
-                <!-- Group 1: 法制作業 (Warm Colors) -->
+                <!-- Group 1: 法制作業 -->
                 <div class="col-span-2 grid grid-cols-2 gap-3">
                    <NuxtLink 
                     :to="`/regulation/${currentLaw?.id}/print`" 
@@ -226,7 +224,7 @@ const hasData = (prefix: string) => {
                 <!-- Divider -->
                 <div class="col-span-2 border-t border-slate-100 dark:border-slate-700 my-1"></div>
 
-                <!-- Group 2: IT 原始碼 (Cool/Neutral Colors) -->
+                <!-- Group 2: IT 原始碼 -->
                 <div class="col-span-2 grid grid-cols-2 gap-3">
                   <NuxtLink 
                     :to="`/regulation/${currentLaw?.id}/embed`" 
@@ -250,7 +248,7 @@ const hasData = (prefix: string) => {
 
             </div>
 
-            <!-- Footer (Optional Info) -->
+            <!-- Footer -->
             <div class="px-6 py-4 bg-slate-50 dark:bg-slate-900/50 border-t border-slate-100 dark:border-slate-800 text-center">
                <span class="text-xs text-slate-400">僅限內部人員使用，請勿外流原始碼。</span>
             </div>

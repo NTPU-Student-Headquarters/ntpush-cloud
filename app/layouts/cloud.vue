@@ -39,11 +39,17 @@ onMounted(() => {
     document.documentElement.classList.add('dark')
   }
 })
+
+// 使用 useHead 將背景 class 直接應用到 <body>
+useHead({
+  bodyAttrs: {
+    class: 'bg-slate-50 dark:bg-[#1b1b1f]'
+  }
+})
 </script>
 
 <template>
-  <!-- 加入 w-full 確保寬度佔滿 -->
-  <div class="min-h-screen flex flex-col bg-slate-50 dark:bg-[#1b1b1f] text-slate-800 dark:text-slate-200 transition-colors duration-300 font-sans overflow-x-hidden w-full">
+  <div class="min-h-screen w-full flex flex-col text-slate-800 dark:text-slate-200 transition-colors duration-300 font-sans">
     
     <!-- 頂部導覽列 (Sticky Header) -->
     <header class="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-[#1b1b1f]/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
@@ -52,12 +58,10 @@ onMounted(() => {
           
           <!-- Logo 與 標題 -->
           <div class="flex items-center gap-3 cursor-pointer min-w-0" @click="navigateTo('/')">
-            <!-- Logo 圖示 -->
             <div class="w-10 h-10 bg-blue-700 dark:bg-blue-600 rounded-xl flex items-center justify-center shadow-sm flex-shrink-0">
               <span class="material-symbols-rounded text-white text-2xl">cloud_circle</span>
             </div>
             
-            <!-- 文字區域 -->
             <div class="flex flex-col min-w-0">
               <h1 class="font-bold text-lg leading-tight tracking-wide text-blue-900 dark:text-blue-100 truncate">
                 NTPU 學生自治雲
@@ -114,13 +118,14 @@ onMounted(() => {
     </header>
 
     <!-- 主要內容區 -->
-    <main class="flex-grow pt-24 px-0 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full flex flex-col">
-      <slot />
+    <main class="flex-grow pt-24 w-full">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <slot />
+      </div>
     </main>
 
-    <!-- 頁尾 -->
     <footer class="mt-12 py-8 bg-slate-50 dark:bg-[#1b1b1f] border-t border-slate-200 dark:border-slate-800">
-      <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500 dark:text-slate-500">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
         <p>© {{ new Date().getFullYear() }} 國立臺北大學學生自治會 NTPU Student Headquarters. All rights reserved.</p>
         <div class="flex gap-4">
           <a href="mailto:ntpusuwebsite@gmail.com" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">系統技術問題</a>
