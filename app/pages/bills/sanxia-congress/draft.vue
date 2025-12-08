@@ -22,14 +22,14 @@ useHead({
         <span class="material-symbols-rounded text-base">chevron_right</span>
         <NuxtLink to="/bills/sanxia-congress" class="text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 transition-colors">三峽議會</NuxtLink>
         <span class="material-symbols-rounded text-base">chevron_right</span>
-        <span class="font-medium text-slate-800 dark:text-slate-200">秘書處排案系統</span>
+        <span class="font-medium text-slate-800 dark:text-slate-200">峽議秘草🍀</span>
       </div>
       <h1 class="text-3xl font-bold text-slate-800 dark:text-slate-100 flex items-center gap-3">
         <span class="material-symbols-rounded text-amber-500 text-4xl">gavel</span>
-        三峽校區學生議會秘書處排案系統
+        峽議秘草🍀
       </h1>
       <p class="mt-2 text-slate-500 dark:text-slate-400 max-w-2xl">
-        功能匯入整合中，請稍後再試。
+        三峽議會秘書處草擬議程與會議紀錄用。<br />功能整合中敬請期待！
       </p>
     </div>
 

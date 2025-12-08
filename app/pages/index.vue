@@ -38,12 +38,12 @@ const systems = [
   },
   {
     id: 'proposal',
-    title: '秘書處排案系統', //提案及查詢系統
-    desc: '三峽議會秘書處用',
+    title: '峽議秘草🍀', //提案及查詢系統
+    desc: '三峽議會秘書處草擬議程與會議紀錄用',
     icon: 'assignment_turned_in',
     color: 'text-blue-600 dark:text-blue-400',
     bg: 'bg-blue-100 dark:bg-blue-900/20',
-    link: 'bills/sanxia-congress/draft-agenda'
+    link: 'bills/sanxia-congress/draft'
   },
   {
     id: 'school',

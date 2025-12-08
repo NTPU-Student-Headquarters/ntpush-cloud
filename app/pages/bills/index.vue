@@ -26,7 +26,7 @@ useHead({
         議案系統
       </h1>
       <p class="mt-2 text-slate-500 dark:text-slate-400 max-w-2xl">
-        目前僅提供三峽校區學生議會 <NuxtLink to="/bills/sanxia-congress/draft-agenda" class="text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 transition-colors">秘書處排案系統</NuxtLink> 功能，其餘功能尚在開發中。
+        目前僅提供三峽校區學生議會 <NuxtLink to="/bills/sanxia-congress/draft" class="text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 transition-colors">峽議秘草</NuxtLink> 功能，其餘功能尚在開發中。
       </p>
     </div>
 
