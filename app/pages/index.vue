@@ -38,12 +38,12 @@ const systems = [
   },
   {
     id: 'proposal',
-    title: '提案及查詢系統(製作中)',
-    desc: '預算審查、決算追蹤與議案進度控管。',
+    title: '秘書處排案系統', //提案及查詢系統
+    desc: '三峽議會秘書處用',
     icon: 'assignment_turned_in',
     color: 'text-blue-600 dark:text-blue-400',
     bg: 'bg-blue-100 dark:bg-blue-900/20',
-    link: ''
+    link: 'bills/sanxia-congress/draft-agenda'
   },
   {
     id: 'school',
@@ -85,7 +85,7 @@ const systems = [
       </h2>
       <p class="text-slate-500 dark:text-slate-400 flex items-center gap-2">
         <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-        僅供內部使用，會員請至<<NuxtLink to="https://ntpusu.org">會網</NuxtLink>瀏覽。
+        僅供內部使用，會員請至<NuxtLink to="https://ntpusu.org" target="_BLANK">會網</NuxtLink>瀏覽。
       </p>
     </div>
 
