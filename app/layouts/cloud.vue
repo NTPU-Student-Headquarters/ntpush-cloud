@@ -128,8 +128,8 @@ useHead({
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
         <p>© {{ new Date().getFullYear() }} 國立臺北大學學生自治會 NTPU Student Headquarters. All rights reserved.</p>
         <div class="flex gap-4">
-          <a href="mailto:ntpusuwebsite@gmail.com" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">系統技術問題</a>
-          <a href="mailto:ntpush92613815@gmail.com" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">管理員聯絡資訊</a>
+          <a href="mailto:ntpusuwebsite@gmail.com" class=" text-blue-900 dark:text-blue-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">系統技術問題</a>
+          <a href="mailto:ntpush92613815@gmail.com" class="text-blue-900 dark:text-blue-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">管理員聯絡資訊</a>
         </div>
       </div>
     </footer>
