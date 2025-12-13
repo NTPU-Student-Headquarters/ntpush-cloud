@@ -1,11 +1,12 @@
 ---
 titleFull: 國立臺北大學學生自治會三峽校區學生議會委員會組織暨職權行使規程
 titleShort: 三峽校區學生議會委員會規程
-modifiedType: 訂定
-modifiedDate: 2025-10-15
+modifiedType: 本會通過
+modifiedDate: 2025-12-11
 status: active
 history: 
   - 114年10月14日三峽校區學生議會第26屆第2次常會通過，10月15日公告（<a href="https://drive.google.com/file/d/1x39G86gnqel7lS_qzu2TpEZS84Wx38ia/view?usp=sharing" target="_blank">北學峽議授秘字第1141015003號公告</a>），訂定全文共35條。
+  - 114年12月11日三峽校區學生議會第26屆第4次常會通過，修正第1、10～13條條文，並刪除第三章第三節節名及第30～34條條文。
   
 ---
 
