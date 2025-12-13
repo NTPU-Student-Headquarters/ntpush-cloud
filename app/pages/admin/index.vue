@@ -1,49 +1,91 @@
 <script setup lang="ts">
 definePageMeta({
   layout: 'cloud',
+  // middleware: 'auth' // 實際專案應開啟此行
 })
+
+
+// 暫時取消登入
+// const user = useUser()
+
+// 如果未登入，導向登入頁 (模擬 Middleware)
+/*
+onMounted(() => {
+  if (!user.value) {
+    navigateTo('/login')
+  }
+})
+  */
 
 const systems = [
   {
-    id: 'financial-statements',
-    title: '財務報表',
-    desc: '本會兩校區各部門預、決算書(測試中)。',
+    id: 'regulation',
+    title: '法規系統',
+    desc: '維護自治章程、組織法規修正案與解釋文。',
     icon: 'gavel',
     color: 'text-amber-600 dark:text-amber-400',
     bg: 'bg-amber-100 dark:bg-amber-900/20',
-    link: '/financial-statements'
+    link: '/regulation'
   },
   {
-    id: 'admin',
-    title: '內部維護頁面',
-    desc: '本會學生自治工作夥伴用來更新資料的系統。',
+    id: 'meeting',
+    title: '會議紀錄系統(製作中)',
+    desc: '上傳各級會議紀錄、發布行政公文與公告。',
     icon: 'folder_open',
     color: 'text-emerald-600 dark:text-emerald-400',
     bg: 'bg-emerald-100 dark:bg-emerald-900/20',
-    link: '/admin'
+    link: ''
   },
   {
-    id: 'web',
-    title: '學生自治會網站',
-    desc: '更多完整資訊請至會網查詢',
+    id: 'proposal',
+    title: '峽議秘草🍀', //提案及查詢系統
+    desc: '三峽議會秘書處草擬議程與會議紀錄用',
     icon: 'assignment_turned_in',
     color: 'text-blue-600 dark:text-blue-400',
     bg: 'bg-blue-100 dark:bg-blue-900/20',
-    link: 'https://ntpusu.org'
+    link: 'bills/sanxia-congress/draft'
   },
+  {
+    id: 'school',
+    title: '校務參與(製作中)',
+    desc: '更新學生代表名單。',
+    icon: 'school',
+    color: 'text-purple-600 dark:text-purple-400',
+    bg: 'bg-purple-100 dark:bg-purple-900/20',
+    link: ''
+  },
+  {
+    id: 'court-decision',
+    title: '裁判書管理系統(製作中)',
+    desc: '學生法院上傳裁判書使用。',
+    icon: 'book',
+    color: 'text-orange-600 dark:text-orange-400',
+    bg: 'bg-orange-100 dark:bg-orange-900/20',
+    link: ''
+  }
 ]
 </script>
 
 <template>
-  <div class="py-8 animate-fade-in"> 
+  <div class="py-8 animate-fade-in"> <!-- v-if="user" -->
     
-    
+    <!-- 歡迎區塊 
     <div class="mb-10">
       <h2 class="text-3xl font-bold text-slate-800 dark:text-slate-100 mb-2">
-        NTPU 學生自治雲 
+        早安user.name 
       </h2>
       <p class="text-slate-500 dark:text-slate-400 flex items-center gap-2">
-        您好，臺北大學學生會歡迎您。
+        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+        系統運作正常 · 您的權限級別：<span class="font-mono bg-slate-200 dark:bg-slate-700 px-1.5 rounded text-xs text-slate-700 dark:text-slate-300">DUCK</span>
+      </p>
+    </div>-->
+    <div class="mb-10">
+      <h2 class="text-3xl font-bold text-slate-800 dark:text-slate-100 mb-2">
+        學生自治公開資訊維護系統 
+      </h2>
+      <p class="text-slate-500 dark:text-slate-400 flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+        僅供內部使用，會員請至<NuxtLink to="https://ntpusu.org" target="_BLANK">會網</NuxtLink>瀏覽。
       </p>
     </div>
 
