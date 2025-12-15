@@ -1,5 +1,6 @@
 // server/api/student-representatives-data.ts
 // 這是初始範例檔案，實際資料將由 GitHub Actions 自動更新
+// lastUpdated 只會在檔案被 workflow 更新時才會變動
 
 export default defineEventHandler(() => {
   return {
@@ -9,9 +10,9 @@ export default defineEventHandler(() => {
         name: "校務會議",
         link: "https://fms.ntpu.edu.tw/km/24761",
         department: "秘書室",
-        departmentLink: "",
-        totalSeats: "",
-        regulationArticle: "",
+        departmentLink: "https://new.ntpu.edu.tw/os/members",
+        totalSeats: "8",
+        regulationArticle: "第3條第1項第1款",
         seatDistribution: "",
         sanxiaRegulation: "",
         sanxiaMethod: "",
@@ -34,7 +35,7 @@ export default defineEventHandler(() => {
         taipeiRegulation: "",
         taipeiMethod: "",
         otherMethod: "",
-        note: "1. 全體學生法官依共識決推派（推派辦法第3條第4項）。\n2. 另有各學院推派學生代表共7名（屬院系所代表，不受本會監督），合計學生代表8名。"
+        note: "1. 全體學生法官依共識決推派(第3條第4項)\n2. 另有各學院推派學生代表共7名(不受本會監督),合計8名。"
       }
     ],
     representatives: [
@@ -80,6 +81,6 @@ export default defineEventHandler(() => {
         representativeName: "周俊良"
       }
     ],
-    lastUpdated: new Date().toISOString()
+    lastUpdated: "2025-12-15T00:00:00.000Z"
   };
 });
