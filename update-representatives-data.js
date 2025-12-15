@@ -1,7 +1,7 @@
 // update-representatives-data.js
-const fs = require('fs');
-const https = require('https');
-const Papa = require('papaparse');
+import fs from 'node:fs';
+import https from 'node:https';
+import Papa from 'papaparse';
 
 const SPREADSHEET_ID = '160GDmRWGq1_lM3w0gGgTPHdJG3hztyJog8rEIOFkaKs';
 
