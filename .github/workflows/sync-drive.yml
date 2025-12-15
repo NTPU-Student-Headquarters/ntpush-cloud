@@ -5,8 +5,8 @@ on:
   workflow_dispatch:
   
   schedule:
-    # 設定排程：每天 UTC 4:00 (相當於 UTC+8 臺北時間中午 12:00) 執行
-    - cron: '0 4 * * *'
+    # 設定排程：每天 UTC 20:30 (相當於 UTC+8 臺北時間凌晨 04:30) 執行
+    - cron: '30 20 * * *'
 
 jobs:
   sync-and-update:
@@ -80,7 +80,7 @@ jobs:
             # ! git diff --staged --quiet 會在有 staged 變更時回傳 true
             if ! git diff --staged --quiet; then
               echo "發現 Staged 變更，準備 commit..."
-              git commit -m "chore(law): 同步法規檔案"
+              git commit -m "sync(regulation): 自動同步法規"
               
               echo "Pulling remote changes before push..."
               # 使用 git pull --rebase 來同步遠端變更，解決 [rejected] 錯誤
