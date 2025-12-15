@@ -12,10 +12,10 @@
           <button
             type="button"
             class="btn btn-outline-secondary"
-            :aria-label="colorMode.value === 'dark' ? '切換至亮色模式' : '切換至暗色模式'"
-            @click="toggleColorMode"
+            :aria-label="colorModeBs5.value === 'dark' ? '切換至亮色模式' : '切換至暗色模式'"
+            @click="toggleColorModeBs5"
           >
-            <i :class="colorMode.value === 'dark' ? 'bi bi-sun-fill' : 'bi bi-moon-fill'"></i>
+            <i :class="colorModeBs5.value === 'dark' ? 'bi bi-sun-fill' : 'bi bi-moon-fill'"></i>
           </button>
           <!-- 離開按鈕 -->
           <a
@@ -171,10 +171,10 @@ useHead({
 });
 
 // 色彩模式
-const colorMode = useColorMode();
+const colorModeBs5 = useColorMode();
 
-const toggleColorMode = () => {
-  colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark';
+const toggleColorModeBs5 = () => {
+  colorModeBs5.preference = colorModeBs5.value === 'dark' ? 'light' : 'dark';
 };
 
 // 學生代表資料
