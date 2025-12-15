@@ -14,6 +14,15 @@ const systems = [
     link: '/financial-statements'
   },
   {
+    id: 'school',
+    title: '校務參與',
+    desc: '本會推派的學生代表名冊。',
+    icon: 'school',
+    color: 'text-purple-600 dark:text-purple-400',
+    bg: 'bg-purple-100 dark:bg-purple-900/20',
+    link: '/student-representatives'
+  },
+  {
     id: 'admin',
     title: '內部維護頁面',
     desc: '本會學生自治工作夥伴用來更新資料的系統。',
