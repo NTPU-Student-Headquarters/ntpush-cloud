@@ -1,6 +1,6 @@
 // server/api/student-representatives-data.ts
 // Auto-generated file - Do not edit manually
-// Last updated: 2025-12-15T21:16:32.253Z
+// Last updated: 2025-12-16T21:17:25.337Z
 
 export default defineEventHandler(() => {
   return {
@@ -707,6 +707,6 @@ export default defineEventHandler(() => {
       "representativeName": "曾宣凱"
     }
   ],
-  "lastUpdated": "2025-12-15T21:16:32.253Z"
+  "lastUpdated": "2025-12-16T21:17:25.337Z"
 };
 });
