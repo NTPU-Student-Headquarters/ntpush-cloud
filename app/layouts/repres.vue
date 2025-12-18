@@ -40,6 +40,13 @@ const colorModeBs5 = useColorMode();
   all: initial;
   display: block;
   min-height: 100vh;
+  
+  background-color: var(--bs-body-bg);
+  color: var(--bs-body-color);
+  font-family: var(--bs-body-font-family);
+  font-size: var(--bs-body-font-size);
+  font-weight: var(--bs-body-font-weight);
+  line-height: var(--bs-body-line-height);
 }
 
 /* 重新應用必要的全域樣式 */
@@ -47,13 +54,4 @@ const colorModeBs5 = useColorMode();
   box-sizing: border-box;
 }
 
-.bootstrap-scope body {
-  margin: 0;
-  font-family: var(--bs-body-font-family);
-  font-size: var(--bs-body-font-size);
-  font-weight: var(--bs-body-font-weight);
-  line-height: var(--bs-body-line-height);
-  color: var(--bs-body-color);
-  background-color: var(--bs-body-bg);
-}
 </style>
