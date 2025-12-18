@@ -11,6 +11,8 @@ const SHEETS = {
   assignments: { gid: '1123889444', name: '03-會議學代名單' }
 };
 
+const OUTPUT_PATH = './server/api/student-representatives-data.ts';
+
 async function fetchSheet(gid) {
   // 初始網址
   const initialUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/export?format=csv&gid=${gid}`;
@@ -19,20 +21,20 @@ async function fetchSheet(gid) {
     // 定義一個發送請求的函式，方便遞迴呼叫 (處理轉址)
     const sendRequest = (url) => {
       https.get(url, (res) => {
-        // 情況 A: 遇到轉址 (狀態碼 301, 302, 307 等)
+        // 情況 1: 遇到轉址 (狀態碼 301, 302, 307 等)
         if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
           // 遞迴呼叫：去抓新的網址
           sendRequest(res.headers.location);
           return;
         }
 
-        // 情況 B: 發生錯誤 (狀態碼 400 以上)
+        // 情況 2: 發生錯誤 (狀態碼 400 以上)
         if (res.statusCode >= 400) {
           reject(new Error(`請求失敗，狀態碼: ${res.statusCode}`));
           return;
         }
 
-        // 情況 C: 成功取得資料
+        // 情況 3: 成功取得資料
         let data = '';
         res.on('data', chunk => data += chunk);
         res.on('end', () => {
@@ -52,6 +54,40 @@ async function fetchSheet(gid) {
   });
 }
 
+function loadExistingData() {
+  try {
+    if (!fs.existsSync(OUTPUT_PATH)) {
+      console.log('本地檔案不存在，將建立新檔案');
+      return null;
+    }
+
+    const content = fs.readFileSync(OUTPUT_PATH, 'utf8');
+    
+    // 從檔案中提取 JSON 資料
+    const jsonMatch = content.match(/return\s+(\{[\s\S]+\});/);
+    if (!jsonMatch) {
+      console.warn('無法解析現有檔案，將重新建立');
+      return null;
+    }
+
+    const data = JSON.parse(jsonMatch[1]);
+    
+    // 移除 lastUpdated 以便比較純資料內容
+    const { lastUpdated, ...dataWithoutTimestamp } = data;
+    return dataWithoutTimestamp;
+  } catch (err) {
+    console.warn('讀取現有檔案時發生錯誤，將重新建立:', err.message);
+    return null;
+  }
+}
+
+function compareData(oldData, newData) {
+  if (!oldData) return false; // 沒有舊資料，視為有變動
+  
+  // 深度比較（排除 lastUpdated）
+  return JSON.stringify(oldData) === JSON.stringify(newData);
+}
+
 async function main() {
   console.log('正在讀取試算表資料...');
   
@@ -65,7 +101,7 @@ async function main() {
   // 務必確認 Google Spreadsheets 欄位順序如下：
   // 各機關官方帳號均有修改權限，如誤修改請協助其復原
 
-    const data = {
+    const newData = {
     // 對應工作表: 01-會議基本資料
       meetings: meetings.map(m => ({
       id: m[0],                 // A欄: 流水編號
@@ -96,34 +132,48 @@ async function main() {
       
     // 對應工作表: 03-會議學代名單
       assignments: assignments.map(a => ({
-      id: a[0],                 // A欄: 流水編號
-      meetingName: a[1],        // B欄: 會議名稱
-      representativeName: a[2]  // C欄: 學代姓名
-    })).filter(a => a.meetingName && a.representativeName), // 確保 B、C欄都有值
-      
+        id: a[0],                 // A欄: 流水編號
+        meetingName: a[1],        // B欄: 會議名稱
+        representativeName: a[2]  // C欄: 學代姓名
+      })).filter(a => a.meetingName && a.representativeName), // 確保 B、C欄都有值
+    };
+
+    console.log(`從試算表讀取: 會議 ${newData.meetings.length} 筆、個別學代 ${newData.representatives.length} 筆、推派人次 ${newData.assignments.length} 筆`);
+
+    // 載入現有資料並比較
+    const existingData = loadExistingData();
+    const isSame = compareData(existingData, newData);
+
+    if (isSame) {
+      console.log('✓ 試算表內容無變動，跳過更新');
+      console.log('本地檔案時間戳記保持不變');
+      process.exit(0);
+    }
+
+    // 有變動，寫入新檔案（含更新時間戳記）
+    console.log('⚠ 偵測到試算表內容變動，更新本地檔案');
+    
+    const dataWithTimestamp = {
+      ...newData,
       lastUpdated: new Date().toISOString()
     };
 
-    // 寫入檔案
-    const outputPath = './server/api/student-representatives-data.ts';
     const content = `// server/api/student-representatives-data.ts
 // Auto-generated file - Do not edit manually
-// Last updated: ${data.lastUpdated}
+// Last updated: ${dataWithTimestamp.lastUpdated}
 
 export default defineEventHandler(() => {
-  return ${JSON.stringify(data, null, 2)};
+  return ${JSON.stringify(dataWithTimestamp, null, 2)};
 });
 `;
 
-    fs.writeFileSync(outputPath, content, 'utf8');
-    console.log('資料更新成功！');
-    console.log(`匯入會議資料筆數：${data.meetings.length}`);
-    console.log(`匯入學代基本資料筆數：${data.representatives.length}`);
-    console.log(`匯入推派筆數：${data.assignments.length}`);
+    fs.writeFileSync(OUTPUT_PATH, content, 'utf8');
+    console.log('✓ 資料更新成功！');
+    console.log(`更新時間: ${dataWithTimestamp.lastUpdated}`);
     process.exit(0);
     
   } catch (err) {
-    console.error('執行過程發生錯誤：', err);
+    console.error('❌ 執行過程發生錯誤：', err);
     process.exit(1);
   }
 }

@@ -1,6 +1,6 @@
 // server/api/student-representatives-data.ts
 // Auto-generated file - Do not edit manually
-// Last updated: 2025-12-15T06:00:38.124Z
+// Last updated: 2025-12-17T21:16:45.873Z
 
 export default defineEventHandler(() => {
   return {
@@ -20,6 +20,22 @@ export default defineEventHandler(() => {
       "taipeiMethod": "",
       "otherMethod": "",
       "note": "校務會議工作報告及檢討會議，資料請見 https://fms.ntpu.edu.tw/km/24762 。"
+    },
+    {
+      "id": "",
+      "name": "會網測試委員會",
+      "link": "https://www.youtube.com/watch?v=0BPL5aw8yPA",
+      "department": "校長室",
+      "departmentLink": "https://www.ftvnews.com.tw/news/detail/2024417L01M1",
+      "totalSeats": "99",
+      "regulationArticle": "總會長諭令",
+      "seatDistribution": "抽籤",
+      "sanxiaRegulation": "沒有",
+      "sanxiaMethod": "棄權",
+      "taipeiRegulation": "沒有",
+      "taipeiMethod": "抽籤",
+      "otherMethod": "學生法官打架打贏的當",
+      "note": "備註呱呱呱"
     },
     {
       "id": "",
@@ -226,8 +242,8 @@ export default defineEventHandler(() => {
       "sanxiaMethod": "",
       "taipeiRegulation": "",
       "taipeiMethod": "",
-      "otherMethod": "1. 全體學生法官依共識決推派（第3條第4項）\n2. 另有各學院推派學生代表共7名（不受本會監督），合計8名。",
-      "note": ""
+      "otherMethod": "全體學生法官依共識決推派（第3條第4項）",
+      "note": "另有各學院推派學生代表共7名（不受本會監督），合計8名。"
     },
     {
       "id": "",
@@ -624,7 +640,7 @@ export default defineEventHandler(() => {
       "note": ""
     },
     {
-      "group": "",
+      "group": "三峽校區",
       "id": "",
       "name": "傅冠紘",
       "title": "三峽校區學生議員（公共事務學院選舉區）",
@@ -632,11 +648,91 @@ export default defineEventHandler(() => {
       "note": ""
     },
     {
-      "group": "",
+      "group": "三峽校區",
       "id": "",
       "name": "曾宣凱",
       "title": "三峽校區學生議員（社會科學學院選舉區）",
+      "department": "社工4",
+      "note": ""
+    },
+    {
+      "group": "三峽校區",
+      "id": "",
+      "name": "吳安仁",
+      "title": "(非基於職務)",
+      "department": "資工3",
+      "note": ""
+    },
+    {
+      "group": "三峽校區",
+      "id": "",
+      "name": "方泳心",
+      "title": "",
       "department": "",
+      "note": ""
+    },
+    {
+      "group": "三峽校區",
+      "id": "",
+      "name": "陳駿毅",
+      "title": "",
+      "department": "",
+      "note": ""
+    },
+    {
+      "group": "三峽校區",
+      "id": "",
+      "name": "林楷瀚",
+      "title": "",
+      "department": "",
+      "note": ""
+    },
+    {
+      "group": "三峽校區",
+      "id": "",
+      "name": "葉湘琳",
+      "title": "",
+      "department": "",
+      "note": ""
+    },
+    {
+      "group": "三峽校區",
+      "id": "",
+      "name": "陳黎吉祥",
+      "title": "",
+      "department": "",
+      "note": ""
+    },
+    {
+      "group": "三峽校區",
+      "id": "",
+      "name": "莊忠諺",
+      "title": "",
+      "department": "",
+      "note": ""
+    },
+    {
+      "group": "三峽校區",
+      "id": "",
+      "name": "塗祉涵",
+      "title": "",
+      "department": "",
+      "note": ""
+    },
+    {
+      "group": "臺北校區",
+      "id": "",
+      "name": "陳毓慈",
+      "title": "",
+      "department": "",
+      "note": ""
+    },
+    {
+      "group": "三峽校區",
+      "id": "",
+      "name": "彭冠維",
+      "title": "三峽學權部長",
+      "department": "財法2",
       "note": ""
     }
   ],
@@ -705,8 +801,28 @@ export default defineEventHandler(() => {
       "id": "",
       "meetingName": "校務會議",
       "representativeName": "曾宣凱"
+    },
+    {
+      "id": "",
+      "meetingName": "學生獎懲委員會",
+      "representativeName": "曾宣凱"
+    },
+    {
+      "id": "",
+      "meetingName": "學生獎懲委員會",
+      "representativeName": "陳昱仁"
+    },
+    {
+      "id": "",
+      "meetingName": "學生獎懲委員會",
+      "representativeName": "吳安仁"
+    },
+    {
+      "id": "",
+      "meetingName": "會網測試委員會",
+      "representativeName": "傅冠紘"
     }
   ],
-  "lastUpdated": "2025-12-15T06:00:38.124Z"
+  "lastUpdated": "2025-12-17T21:16:45.873Z"
 };
 });
