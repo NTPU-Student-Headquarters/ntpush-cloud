@@ -1,6 +1,6 @@
 <!-- app/pages/student-representatives.vue -->
 <template>
-  <div>
+  <div class="bg-body min-vh-100">
     <!-- 導覽列 -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top shadow-sm">
       <div class="container-fluid">
