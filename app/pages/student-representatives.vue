@@ -40,7 +40,8 @@
             <h1 class="display-5 fw-bold mb-4 text-center">學生代表名冊</h1>
             <p class="lead text-center mb-4">
               本頁面列出 國立臺北大學學生自治會 推派至各校級會議的學生代表名單。<br />
-              這些同學負責代表全體學生參與學校決策，保障學生權益，並由學生議會監督。
+              這些同學負責代表全體學生參與學校決策，保障學生權益，並由學生議會監督。<br />
+              <span class="text-danger fw-bold">注意：本頁面尚在測試，實際代表名單以會網公告為準。</span>
             </p>
             <div class="text-center">
               <a
