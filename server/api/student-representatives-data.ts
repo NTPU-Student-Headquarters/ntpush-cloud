@@ -1,6 +1,6 @@
 // server/api/student-representatives-data.ts
 // Auto-generated file - Do not edit manually
-// Last updated: 2025-12-17T21:16:45.873Z
+// Last updated: 2025-12-19T21:15:35.449Z
 
 export default defineEventHandler(() => {
   return {
@@ -20,22 +20,6 @@ export default defineEventHandler(() => {
       "taipeiMethod": "",
       "otherMethod": "",
       "note": "校務會議工作報告及檢討會議，資料請見 https://fms.ntpu.edu.tw/km/24762 。"
-    },
-    {
-      "id": "",
-      "name": "會網測試委員會",
-      "link": "https://www.youtube.com/watch?v=0BPL5aw8yPA",
-      "department": "校長室",
-      "departmentLink": "https://www.ftvnews.com.tw/news/detail/2024417L01M1",
-      "totalSeats": "99",
-      "regulationArticle": "總會長諭令",
-      "seatDistribution": "抽籤",
-      "sanxiaRegulation": "沒有",
-      "sanxiaMethod": "棄權",
-      "taipeiRegulation": "沒有",
-      "taipeiMethod": "抽籤",
-      "otherMethod": "學生法官打架打贏的當",
-      "note": "備註呱呱呱"
     },
     {
       "id": "",
@@ -823,6 +807,6 @@ export default defineEventHandler(() => {
       "representativeName": "傅冠紘"
     }
   ],
-  "lastUpdated": "2025-12-17T21:16:45.873Z"
+  "lastUpdated": "2025-12-19T21:15:35.449Z"
 };
 });
