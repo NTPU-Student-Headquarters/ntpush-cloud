@@ -1,6 +1,8 @@
 // middleware/auth.global.ts
 export default defineNuxtRouteMiddleware((to) => {
   const { loggedIn } = useUserSession()
+  
+   console.log(`[auth.global] path=${to.path}, loggedIn=${loggedIn.value}, server=${import.meta.server}`)
 
   // 已登入的使用者試圖訪問 /login，導回首頁
   if (to.path === '/login') {
