@@ -1,4 +1,4 @@
-// app/middleware/guest-only.ts
+// middleware/guest-only.ts
 export default defineNuxtRouteMiddleware(() => {
   const { loggedIn } = useUserSession()
   if (loggedIn.value) {
