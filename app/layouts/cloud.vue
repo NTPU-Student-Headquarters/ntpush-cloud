@@ -45,9 +45,6 @@ const handleLogout = async () => {
 </script>
 
 <template>
-  
-</template>
-<template>
   <div class="min-h-screen w-full flex flex-col text-slate-800 dark:text-slate-200 transition-colors duration-300 font-sans">
     
     <!-- 頂部導覽列 (Sticky Header) -->
