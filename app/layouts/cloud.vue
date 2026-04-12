@@ -42,6 +42,8 @@ const handleLogout = async () => {
   await clear() // 這會呼叫後端 API 並清除前端狀態
   navigateTo('/login')
 }
+
+
 </script>
 
 <template>
@@ -111,13 +113,13 @@ const handleLogout = async () => {
 
               <!-- 未登入（理論上 middleware 應已攔截，這裡作為 fallback 保險） -->
               <div v-else class="flex items-center gap-3 pl-3 border-l border-slate-300 dark:border-slate-700">
-                <button
-                  @click="navigateTo('/login')"
-                  class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-700 hover:bg-blue-600 text-white text-sm font-medium transition-colors"
-                >
-                  <span class="material-symbols-rounded text-base">login</span>
-                  登入
-                </button>
+                  <NuxtLink
+                    to="/login"
+                    class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-700 hover:bg-blue-600 text-white text-sm font-medium transition-colors"
+                  >
+                    <span class="material-symbols-rounded text-base">login</span>
+                    登入
+                  </NuxtLink>
               </div>
 
               <!-- SSR 水合前的 loading 骨架，避免畫面閃爍 -->
