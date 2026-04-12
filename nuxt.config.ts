@@ -33,7 +33,8 @@ export default defineNuxtConfig({
     '@nuxt/image', 
     '@nuxtjs/tailwindcss', 
     '@nuxtjs/color-mode', 
-    '@nuxt/icon'
+    '@nuxt/icon',
+    'nuxt-auth-utils'
   ],
 
   colorMode: {
