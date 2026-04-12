@@ -28,10 +28,10 @@ const handleGoogleLogin = () => {
           <span class="material-symbols-rounded text-4xl text-blue-600 dark:text-blue-400">admin_panel_settings</span>
         </div>
 
-        <h2 class="text-2xl font-bold mb-3 text-slate-800 dark:text-slate-100">自治夥伴登入</h2>
+        <h2 class="text-2xl font-bold mb-3 text-slate-800 dark:text-slate-100">自治機關登入</h2>
         <p class="text-slate-500 dark:text-slate-400 text-sm mb-8 leading-relaxed">
-          本系統僅限國立臺北大學學生自治組織<br>
-          內部人員使用，請使用授權信箱登入。
+          本系統僅限國立臺北大學學生自治會<br />
+          各機關(含網管小組)使用，請使用貴機關官方信箱登入。
         </p>
 
         <button 
@@ -51,7 +51,7 @@ const handleGoogleLogin = () => {
           <div class="flex items-start gap-2 text-left">
             <span class="material-symbols-rounded text-amber-500 text-lg mt-0.5">warning</span>
             <p class="text-xs text-slate-400 dark:text-slate-500">
-              非授權帳號將無法通過驗證。若您是新進幹部且無法登入，請聯繫秘書部或資訊長更新白名單權限。
+              非授權帳號將無法通過驗證。若貴單位官方信箱有異動，請聯絡網管小組更新權限。
             </p>
           </div>
         </div>
