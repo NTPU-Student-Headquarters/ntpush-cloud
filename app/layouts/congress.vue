@@ -10,6 +10,7 @@ import {
     X,
     ChevronDown,
 } from "lucide-vue-next";
+import { siteNavigation } from "../../config/navigation";
 
 const { user, clear } = useUserSession();
 const config = useRuntimeConfig().public;
@@ -20,28 +21,6 @@ const isMobileMenuOpen = ref(false);
 const toggleTheme = () => {
     colorMode.preference = colorMode.value === "dark" ? "light" : "dark";
 };
-
-// 導覽選單資料結構
-const navigation = [
-    {
-        name: "法規系統",
-        icon: Gavel,
-        children: [
-            { name: "同步法規", href: "/bylaws/sync" },
-            { name: "取得各式檔案", href: "/regulation" },
-        ],
-    },
-    {
-        name: "議事文件草擬",
-        icon: FileText,
-        children: [
-            { name: "同步議案", href: "/drafting/sync-bills" },
-            { name: "同步委員會報告", href: "/drafting/sync-reports" },
-            { name: "草擬議程", href: "/drafting/agenda" },
-            { name: "草擬會議紀錄", href: "/drafting/minutes" },
-        ],
-    },
-];
 </script>
 
 <template>
@@ -103,7 +82,7 @@ const navigation = [
 
                         <hr />
 
-                        <li v-for="item in navigation" :key="item.name">
+                        <li v-for="item in siteNavigation" :key="item.name">
                             <details>
                                 <summary>
                                     <component
