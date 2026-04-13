@@ -3,11 +3,8 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 
-// 模擬使用者狀態 (實際專案會從 Pinia 或 useAuth 取得)
-/*
-const user = useUser() // 假設有一個 global composable
+// 1. 主題設定部分
 
-*/
 const isDark = ref(false)
 
 // 切換深色模式
@@ -21,15 +18,6 @@ const toggleTheme = () => {
     localStorage.setItem('theme', 'light')
   }
 }
-
-// 登出功能
-/*
-const handleLogout = async () => {
-  // await signOut() // 呼叫 Auth 模組登出
-  user.value = null
-  navigateTo('/login')
-}
-*/
 
 // 初始化主題
 onMounted(() => {
@@ -46,6 +34,16 @@ useHead({
     class: 'bg-slate-50 dark:bg-[#1b1b1f]'
   }
 })
+
+// 2. 登入登出部分
+const { user, loggedIn, clear } = useUserSession()
+
+const handleLogout = async () => {
+  await clear() // 這會呼叫後端 API 並清除前端狀態
+  navigateTo('/login')
+}
+
+
 </script>
 
 <template>
@@ -64,7 +62,7 @@ useHead({
             
             <div class="flex flex-col min-w-0">
               <h1 class="font-bold text-lg leading-tight tracking-wide text-blue-900 dark:text-blue-100 truncate">
-                NTPU 學生自治雲
+                NTPU Congress Cloud App
               </h1>
               <span class="text-[10px] text-slate-500 dark:text-slate-400 font-medium tracking-wider uppercase truncate">
                 Internal Only
@@ -84,14 +82,15 @@ useHead({
             </button>
 
             <!-- 使用者資訊 / 登出 -->
-            <!--
             <ClientOnly>
-              <div v-if="user" class="flex items-center gap-3 pl-3 border-l border-slate-300 dark:border-slate-700">
+              <!-- 已登入：顯示使用者名稱與登出按鈕 -->
+              <div v-if="loggedIn && user" class="flex items-center gap-3 pl-3 border-l border-slate-300 dark:border-slate-700">
                 <div class="hidden md:flex flex-col items-end">
-                  <span class="text-sm font-medium">{{ user.name }}</span>
-                  <span class="text-xs text-slate-500 dark:text-slate-400">{{ user.department }}</span>
+                  <span class="text-sm font-medium">{{ user.shortName }}</span>
+                  <!-- <span class="text-xs text-slate-500 dark:text-slate-400">{{ user.department }}</span> -->
                 </div>
                 
+                <!-- 
                 <img 
                   v-if="user.avatar" 
                   :src="user.avatar" 
@@ -101,6 +100,7 @@ useHead({
                 <div v-else class="w-9 h-9 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center text-blue-700 dark:text-blue-300 font-bold">
                   {{ user.name.charAt(0) }}
                 </div>
+                 -->
                 
                 <button 
                   @click="handleLogout"
@@ -110,8 +110,26 @@ useHead({
                   <span class="material-symbols-rounded text-xl">logout</span>
                 </button>
               </div>
+
+              <!-- 未登入（理論上 middleware 應已攔截，這裡作為 fallback 保險） -->
+              <div v-else class="flex items-center gap-3 pl-3 border-l border-slate-300 dark:border-slate-700">
+                  <NuxtLink
+                    to="/login"
+                    class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-700 hover:bg-blue-600 text-white text-sm font-medium transition-colors"
+                  >
+                    <span class="material-symbols-rounded text-base">login</span>
+                    登入
+                  </NuxtLink>
+              </div>
+
+              <!-- SSR 水合前的 loading 骨架，避免畫面閃爍 -->
+              <template #fallback>
+                <div class="pl-3 border-l border-slate-300 dark:border-slate-700">
+                  <div class="w-20 h-5 rounded bg-slate-200 dark:bg-slate-700 animate-pulse" />
+                </div>
+              </template>
             </ClientOnly>
-            -->
+            
           </div>
         </div>
       </div>
@@ -139,5 +157,5 @@ useHead({
 
 <style scoped>
 /* 引入 Material Symbols */
-@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 </style>

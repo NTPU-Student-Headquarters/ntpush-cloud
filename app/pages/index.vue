@@ -6,39 +6,12 @@ definePageMeta({
 const systems = [
   {
     id: 'financial-statements',
-    title: '財務報表',
-    desc: '本會兩校區各部門預、決算書(測試中)。',
+    title: '法規系統',
+    desc: '內部使用。',
     icon: 'gavel',
     color: 'text-amber-600 dark:text-amber-400',
     bg: 'bg-amber-100 dark:bg-amber-900/20',
-    link: '/financial-statements'
-  },
-  {
-    id: 'school',
-    title: '校務參與',
-    desc: '本會推派的學生代表名冊。',
-    icon: 'school',
-    color: 'text-purple-600 dark:text-purple-400',
-    bg: 'bg-purple-100 dark:bg-purple-900/20',
-    link: '/student-representatives'
-  },
-  {
-    id: 'admin',
-    title: '內部維護頁面',
-    desc: '本會學生自治工作夥伴用來更新資料的系統。',
-    icon: 'folder_open',
-    color: 'text-emerald-600 dark:text-emerald-400',
-    bg: 'bg-emerald-100 dark:bg-emerald-900/20',
-    link: '/admin'
-  },
-  {
-    id: 'web',
-    title: '學生自治會網站',
-    desc: '更多完整資訊請至會網查詢',
-    icon: 'assignment_turned_in',
-    color: 'text-blue-600 dark:text-blue-400',
-    bg: 'bg-blue-100 dark:bg-blue-900/20',
-    link: 'https://ntpusu.org'
+    link: '/regulation'
   },
 ]
 </script>
