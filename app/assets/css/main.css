@@ -1,0 +1,20 @@
+/* app\assets\css\main.css */
+
+/* 引入 Pico CSS */
+@import "@picocss/pico/css/pico.min.css";
+
+:root {
+  --pico-primary: #0f2d4b;
+  --pico-primary-background: #0f2d4b;
+  --pico-primary-underline: rgba(15, 45, 75, 0.5);
+  --pico-primary-hover-background: #1a4a75;
+}
+
+/* 暗色模式適配：將 Congress Blue 稍微調亮以增加對比度 */
+[data-theme="dark"] {
+  --pico-primary: #3a79b8;
+  --pico-primary-background: #3a79b8;
+  --pico-primary-hover-background: #4a89c8;
+}
+
+/* 在 tailwind.config.ts 中已經禁用 preflight，如此， Tailwind 的 Preflight 理應不會完全蓋掉 Pico 的標籤樣式 */
