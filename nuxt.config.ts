@@ -14,7 +14,8 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      title: 'NTPU 學生自治雲',
+      title: siteConfig.name,
+      titleTemplate: '%s - '+siteConfig.shortName,
       htmlAttrs: { lang: 'zh-Hant-TW', },
       meta: [
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
