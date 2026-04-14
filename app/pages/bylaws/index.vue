@@ -50,7 +50,7 @@ const categorizedLaws = computed(() => {
 
     const [id, title] = item;
     
-    // 4. 使用 String(id) 強制轉型！這比 .toString() 安全，遇到 null/undefined 也不會報錯
+    // 使用 String(id) 強制轉型
     const idStr = String(id);
     const titleStr = String(title);
     const prefix = idStr.charAt(0);
@@ -85,8 +85,20 @@ const handleDownloadDocx = async () => {
   if (!currentLaw.value) return
   isGeneratingDocx.value = true
   try {
-    const rawRegulation = await $fetch(`/api/regulation/${currentLaw.value.id}`)
-    await generateAndDownloadDocx(rawRegulation)
+    const response: any = await $fetch(`/api/regulation/single/${currentLaw.value.id}`)
+    
+    // 印出 API 原始回傳內容供除錯參考
+    console.log('DOCX - API 原始回傳內容:', response)
+
+    // 嘗試自動解開常見的 API JSON 包裝 (例如 { data: { titleFull: "..." } })
+    const regData = response.data || response.regulation || response.body || response
+
+    // 防呆：確認解包後的資料真的有需要的欄位
+    if (!regData || !regData.titleFull) {
+      throw new Error('API 資料結構不符預期，找不到 titleFull 欄位。請開啟 F12 主控台確認實際資料格式')
+    }
+
+    await generateAndDownloadDocx(regData)
   } catch (err: any) {
     console.error('產生 Word 文件失敗細節:', err)
     alert(`產生文件失敗：${err.message || '未知錯誤'}。詳細資訊請按 F12 查看主控台。`)
@@ -99,8 +111,17 @@ const handleCopyHtml = async () => {
   if (!currentLaw.value) return
   isCopyingHtml.value = true
   try {
-    const rawRegulation = await $fetch(`/api/regulation/${currentLaw.value.id}`)
-    await copyHtmlSourceToClipboard(rawRegulation)
+    const response: any = await $fetch(`/api/regulation/single/${currentLaw.value.id}`)
+    
+    console.log('HTML - API 原始回傳內容:', response)
+
+    const regData = response.data || response.regulation || response.body || response
+
+    if (!regData || !regData.titleFull) {
+       throw new Error('API 資料結構不符預期，找不到 titleFull 欄位。請開啟 F12 主控台確認實際資料格式')
+    }
+
+    await copyHtmlSourceToClipboard(regData)
   } catch (err: any) {
     console.error('複製 HTML 失敗細節:', err)
     alert(`獲取原始碼失敗：${err.message || '未知錯誤'}。詳細資訊請按 F12 查看主控台。`)
