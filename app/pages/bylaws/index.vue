@@ -170,7 +170,7 @@ const handleCopyHtml = async () => {
           <ul v-if="hasData(cat.prefix)">
             <li v-for="([id, title]) in categorizedLaws[cat.prefix]" :key="id">
               <a href="#" @click.prevent="openModal(id.toString(), title)">
-                <small>{{ id.toString().padStart(4, '0') }}</small> - {{ title }}
+                {{ id.toString().padStart(4, '0') }} - {{ title }}
               </a>
             </li>
           </ul>
@@ -187,7 +187,7 @@ const handleCopyHtml = async () => {
           <p><strong>{{ currentLaw?.title }}</strong></p>
         </header>
 
-        <p><small>法規編號：{{ currentLaw?.id.toString().padStart(4, '0') }}</small></p>
+        <p>法規編號：{{ currentLaw?.id.toString().padStart(4, '0') }}</p>
         
         <div class="grid">
           <NuxtLink :to="`/bylaws/${currentLaw?.id}/print`" target="_blank" role="button" class="outline">
@@ -210,7 +210,7 @@ const handleCopyHtml = async () => {
         </div>
 
         <footer>
-          <small>僅限內部人員使用，請勿外流原始碼。</small>
+          注意：立法文件請小心保管，注意使用。
         </footer>
       </article>
     </dialog>
