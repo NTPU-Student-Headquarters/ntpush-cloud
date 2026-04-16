@@ -15,8 +15,64 @@ import { siteNavigation } from "../../config/navigation";
 const { user, clear } = useUserSession();
 const config = useRuntimeConfig().public;
 const colorMode = useColorMode();
+const router = useRouter();
 
 const isMobileMenuOpen = ref(false);
+
+// ----------------------------------------------------------------
+// 登出確認 Dialog 狀態
+// ----------------------------------------------------------------
+const logoutDialogRef = ref<HTMLDialogElement | null>(null);
+
+/** 點選登出按鈕：開啟確認彈窗 */
+const openLogoutDialog = () => {
+    logoutDialogRef.value?.showModal();
+};
+
+/** 彈窗：取消登出 */
+const cancelLogout = () => {
+    logoutDialogRef.value?.close();
+};
+
+/** 彈窗：確認登出 */
+const confirmLogout = async () => {
+    logoutDialogRef.value?.close();
+    await clear();                   // 清除 session
+    showToast('您已經登出');
+    await router.push('/login');
+};
+
+// ----------------------------------------------------------------
+// Toast 通知（共用：登出成功 + 無權限警告）
+// ----------------------------------------------------------------
+
+// 與 auth.global.ts 共享同一個 useState key
+const toastMessage = useState<string | null>('toast-message', () => null);
+const toastVisible = ref(false);
+const toastTimer = ref<ReturnType<typeof setTimeout> | null>(null);
+
+/** 顯示一則 toast，3 秒後自動消失 */
+const showToast = (message: string) => {
+    toastMessage.value = message;
+    toastVisible.value = true;
+    if (toastTimer.value) clearTimeout(toastTimer.value);
+    toastTimer.value = setTimeout(() => {
+        toastVisible.value = false;
+        toastMessage.value = null;
+    }, 3000);
+};
+
+// 當 middleware 在路由跳轉後設定了 toastMessage，這裡負責接收並顯示
+watch(toastMessage, (msg) => {
+    if (msg) showToast(msg);
+});
+
+// 元件卸載時清除 timer 避免記憶體洩漏
+onUnmounted(() => {
+    if (toastTimer.value) clearTimeout(toastTimer.value);
+});
+
+// ----------------------------------------------------------------
 
 const toggleTheme = () => {
     colorMode.preference = colorMode.value === "dark" ? "light" : "dark";
@@ -25,6 +81,31 @@ const toggleTheme = () => {
 
 <template>
     <div class="app-layout">
+        <!-- ── Toast 通知 ─────────────────────────────────────── -->
+        <Transition name="toast">
+            <div v-if="toastVisible && toastMessage" class="toast-notification" role="alert" aria-live="assertive">
+                {{ toastMessage }}
+            </div>
+        </Transition>
+
+        <!-- ── 登出確認 Dialog ────────────────────────────────── -->
+        <dialog ref="logoutDialogRef">
+            <article>
+                <header>
+                    <strong>確認登出</strong>
+                </header>
+                <p>您確定要登出系統嗎？</p>
+                <footer>
+                    <button class="secondary outline" @click="cancelLogout">取消</button>
+                    <button @click="confirmLogout">
+                        <LogOut :size="14" class="mr-2" />
+                        是，登出
+                    </button>
+                </footer>
+            </article>
+        </dialog>
+
+        <!-- ── 手機版頂部 Header ───────────────────────────────── -->
         <header class="mobile-header md:hidden container-fluid">
             <nav>
                 <ul>
@@ -71,10 +152,11 @@ const toggleTheme = () => {
                                 </summary>
                                 <ul dir="rtl">
                                     <li>
-                                        <a href="#" @click.prevent="clear"
-                                            ><LogOut :size="14" class="mr-2" />
-                                            登出</a
-                                        >
+                                        <!-- 改為呼叫 openLogoutDialog，不直接 clear -->
+                                        <a href="#" @click.prevent="openLogoutDialog">
+                                            <LogOut :size="14" class="mr-2" />
+                                            登出
+                                        </a>
                                     </li>
                                 </ul>
                             </details>
@@ -221,5 +303,34 @@ const toggleTheme = () => {
 .main-footer {
     margin-top: 4rem;
     text-align: center;
+}
+
+/* ── Toast 通知樣式 ──────────────────────────────────── */
+.toast-notification {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    background: var(--pico-color);
+    color: var(--pico-background-color);
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--pico-border-radius);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    font-size: 0.95rem;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+/* Toast 進入/離開動畫 */
+.toast-enter-active,
+.toast-leave-active {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.toast-enter-from,
+.toast-leave-to {
+    opacity: 0;
+    transform: translateX(-50%) translateY(1rem);
 }
 </style>
