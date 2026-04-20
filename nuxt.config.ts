@@ -68,7 +68,8 @@ export default defineNuxtConfig({
       workflowNameReports: 'fetch-committee-reports.yml',
       workflowNameBills: 'fetch-bills.yml',
       workflowNameBylaws: 'fetch-bylaws.yml',
-    }
+    },
+    githubToken: '', // 請在環境變數設定
     
   },
   
