@@ -1,33 +1,25 @@
-const lawList = [
-  [1101,'三峽校區學生會組織法'],
-  [1102,'三峽校區學生代表推派條例'],
-  [1201,'三峽校區預決算法'],
-  [1202,'三峽校區經費法'],
-  [1203,'三峽校區資產法'],
-  [2001,'三峽校區學生議會組織、職權行使法'],
-  [2002,'三峽校區學生議會議事規則'],
-  [2003,'三峽校區學生議員出缺席規則'],
-  [2004,'三峽校區學生議會委員會規程'],
-  [2005,'學生自治低落對策委員會規程'],
-  [2006,'三峽校區學生議會秘書處組織規程'],
-  [2007,'三峽議會助理聘任辦法'],
-  [3001,'學生自治訴訟法'],
-  [3002,'學生法院組織法'],
-  [3003,'學生法官自律辦法'],
-  [4301,'臺北校區財務行政法'],
-  [4302,'臺北校區補助系學會條例'],
-  [5105,'臺北議會互選議長副議長辦法'],
-  [6001,'組織章程'],
-  [6002,'學生代表推派法'],
-  [6003,'自治資訊公開法'],
-  [6004,'法規標準法'],
-  [6005,'跨校區事務條例'],
-  [6006,'臺學聯章程施行法'],
-  [6101,'總會組織、職權行使法'],
-  [6102,'總會選委會組織法'],
-  [6103,'榮典授予辦法'],
-];
-
-export default defineEventHandler( () => {
-  return lawList
+export default defineEventHandler(async (event) => {
+  
+  const config = useRuntimeConfig(event)
+  const { repo, branch, listPath } = config.legiDataSource
+  
+  try {
+    const response = await fetch(
+      `https://raw.githubusercontent.com/${repo}/refs/heads/${branch}/${listPath}`
+    )
+    
+    if (!response.ok) {
+      throw new Error(`Failed to fetch bylaw list: ${response.statusText}`)
+    }
+    
+    const lawList = await response.json()
+    return lawList
+  } catch (error) {
+    console.error('Error fetching bylaw list:', error)
+    // 可選：返回空陣列或拋出錯誤
+    throw createError({
+      statusCode: 500,
+      statusMessage: 'Failed to fetch regulations'
+    })
+  }
 })

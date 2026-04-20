@@ -1,5 +1,9 @@
 // app/middleware/auth.global.ts
 export default defineNuxtRouteMiddleware((to) => {
+  
+  // 排除 API 路由與其他不需驗證的靜態路徑
+  if (to.path.startsWith('/api/')) return
+  
   const { loggedIn, user } = useUserSession()
 
   console.log(`[auth.global] path=${to.path}, loggedIn=${loggedIn.value}, server=${import.meta.server}`)

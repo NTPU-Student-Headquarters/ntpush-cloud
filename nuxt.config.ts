@@ -53,9 +53,23 @@ export default defineNuxtConfig({
   
   // 注入全域變數
   runtimeConfig: {
-      public: {
-        ...siteConfig
-      }
+    public: {
+      ...siteConfig
+    },
+    // 以下定義立法資料儲存在哪裡，只能在 Server 端存取
+    legiDataSource: {
+      repo: 'ntpuscs/legislative-data',
+      branch: 'main',
+      
+      basePath: 'data/bylaws', // 各法規文字檔案之路徑
+      listPath: 'data/bylaw-list.json',
+      
+      workflowBasePath: '.github/workflows',
+      workflowNameReports: 'fetch-committee-reports.yml',
+      workflowNameBills: 'fetch-bills.yml',
+      workflowNameBylaws: 'fetch-bylaws.yml',
+    }
+    
   },
   
   vite: {
